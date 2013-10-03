@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>Journal Prompt</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="jquery.countdown.js"></script>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+
+    <style>
+      body {
+        background: #33aadc;
+        color: #fff;
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        text-align: center;
+      }
+      body.ended { background: #4cd964; }
+      h1 {
+        font-size: 36px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 15% auto;
+        padding: 0;
+      }
+    </style>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+    <![endif]-->
+
+    <script>
+      $(function() {
+        var snd = new Audio("bell.mp3"); // buffers automatically when created
+        var promptArray = [
+           "What I'm feeling now is",
+           "I am aware that",
+           "What motivates me is",
+           "I am inspired by",
+           "Today, I aspire to",
+           "What hurts me is",
+           "I wish",
+           "I stand for",
+           "My core values are",
+           "Others are",
+           "I made a happy mistake",
+           "Love is"
+        ];
+        var currentPrompt = promptArray[Math.floor(Math.random() * promptArray.length)];
+        $('h1 span#prompt').text(currentPrompt);
+        $('h1 span#timer').countdown({
+          date: +(new Date) + 180000,
+          render: function(data) {
+            $(this.el).text(data.min + ':' + this.leadingZeros(data.sec, 2));
+          },
+          onEnd: function() {
+            snd.play();
+            $('body').addClass('ended');
+          }
+        });
+      });
+    </script>
+
+  </head>
+  <body>
+
+    <h1>
+      <span id='prompt'></span>... <span id='timer'></span>
+    </h1>
+
+  </body>
+</html>
