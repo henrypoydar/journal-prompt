@@ -11,18 +11,19 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="jquery.countdown.js"></script>
+    <script src="jquery.color.js"></script>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
 
     <style>
       body {
-        background: #33aadc;
+        background-color: #fff;
         color: #fff;
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 16px;
         line-height: 1.5;
         text-align: center;
       }
-      body.ended { background: #4cd964; }
+      body.ended { opacity: 0.5; }
       h1, h2 {
         font-weight: 300;
         line-height: 1.5;
@@ -67,7 +68,21 @@
            "I made a happy mistake",
            "Love is"
         ];
+        var colorArray = [
+          "#8e8e93",
+          "#f33758",
+          "#f34231",
+          "#f79626",
+          "#fbcc2e",
+          "#68d755",
+          "#6bc8fd",
+          "#4aaade",
+          "#1c7cfb",
+          "#5558db"
+        ];
         var currentPrompt = promptArray[Math.floor(Math.random() * promptArray.length)];
+        var currentColor = colorArray[Math.floor(Math.random() * colorArray.length)];
+        $('body').css('background-color', currentColor);
         $('h1').text(currentPrompt + '...');
         $('h2').countdown({
           date: +(new Date) + 180000,
@@ -76,7 +91,8 @@
           },
           onEnd: function() {
             snd.play();
-            $('body').addClass('ended');
+            $( "body" ).animate({backgroundColor: "#fff"}, 1000)
+            $( "body" ).animate({color: currentColor}, 500)
           }
         });
       });
