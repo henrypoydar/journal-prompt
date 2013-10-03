@@ -11,7 +11,7 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="jquery.countdown.js"></script>
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
 
     <style>
       body {
@@ -23,12 +23,25 @@
         text-align: center;
       }
       body.ended { background: #4cd964; }
-      h1 {
-        font-size: 36px;
-        font-weight: 400;
+      h1, h2 {
+        font-weight: 300;
         line-height: 1.5;
-        margin: 15% auto;
         padding: 0;
+      }
+      h1 {
+        font-size: 60px;
+        margin: 10% auto 0 auto;
+      }
+      h2 {
+        font-size: 200px; 
+        font-weight: 600;
+        margin: 0 auto 5% auto;
+      }
+      @media (max-width: 700px) {
+        h1 {
+          margin-top: 20%;
+          font-size: 24px; }
+        h2 { font-size: 90px; }
       }
     </style>
 
@@ -55,8 +68,8 @@
            "Love is"
         ];
         var currentPrompt = promptArray[Math.floor(Math.random() * promptArray.length)];
-        $('h1 span#prompt').text(currentPrompt);
-        $('h1 span#timer').countdown({
+        $('h1').text(currentPrompt + '...');
+        $('h2').countdown({
           date: +(new Date) + 180000,
           render: function(data) {
             $(this.el).text(data.min + ':' + this.leadingZeros(data.sec, 2));
@@ -72,9 +85,8 @@
   </head>
   <body>
 
-    <h1>
-      <span id='prompt'></span>... <span id='timer'></span>
-    </h1>
+    <h1></h1>
+    <h2></h2>
 
   </body>
 </html>
